@@ -1,0 +1,227 @@
+Source:-https://www.youtube.com/playlist?list=PLC3y8-rFHvwhBRAgFinJR8KHIrCdTkZcZ
+Angular
+	-it is a client side application 
+	-it is one page application like(Gmail -  you not load any page, without refreshing a page whole ui is run) 
+	-there are many module in angular (f.g user module, admin module)
+		-root module is root of all module
+		-there are many componant and many services in one module (f.g - side bar main content, header, footer)
+			-componant have html and class (class have a logic to control particuler view)
+			-service which have business logic
+			-there is root componant is root of componant
+	-module intract with browser and provide view		
+	
+workfolw of code
+	-install node in your machine
+		-check version of node in cmd
+	-install angular/cli in cmd
+		-command:- npm install -g @angular/cli
+	-install vs code and intigrate cmd in it
+	-create a folder than 
+	-create a project 
+		command:- ng new <project name>
+	-go to project and start a server 
+		command:- ng serve
+	main.ts -> AppModule -> AppComponent -> vaiable use in html		
+		
+Components
+	-command:- ng g c <componant name>
+	-componant have template + class + metadata
+		-template have html(view)
+		-class have business logic (typescript code and data,method)
+		-metadata have informection decoretor
+	-in top of typescript file metadata avilable 
+		-inwhich you can add inline html,css and selector
+			-selector is use in html through teg
+	-instand inline html and css , can also use file path with name of file		
+	
+Interpolation {{}}
+	-it is bind the template html to typescript class
+	-using double curly breses we can access typescript variable in html
+	-so you can access any typescripe variable in html
+	-and you didnt assign variable value in Interpolation 
+		-if you didn't access windows.location.href in Interpolation (so you can access through typescripe variable)
+		
+Property Binding - []
+	-use [] breacket for Property Binding
+	-for accessing except boolean variable from typescript
+	Attribute v/s Property
+		Attribute	
+			-it is html
+			-once they inclize after thet did'nt change
+			-attribute inclize DOM properties and then they are done
+		Property
+			- it is DOM (document object model)
+			-properties value however change
+	Disadvantage of Interpolation
+		it is use only with string value, so if you want to use with boolean then you shoued use property binding
+		
+Class Binding []
+	- Class Binding also use with [] breacket
+	- if css class apply through typescript variable then use class binding in html
+	- you can use validection through use class binding
+	- and also use multiple class
+
+Style Binding
+	- Style Binding also like a Class Binding
+	- you shoued use style eliment in html through typescript ckass
+	
+Event Binding - (click)
+	- before this we only try class to template binding (typescript class to html)
+	- now onwords we try to do event when user do some event in browser
+	- for that on button on click (click) some typescript function call and print some o/p in browser through Interpolation
+			
+Template Reference Variables
+	- if you want to print input filed data at that time using #symobol folling by text(i.e Id)
+	- we can do on click event of button so, pass input filed id on typescript method argument and fetch input filed data
+	
+Two Way Binding [()]
+	- it is two way binding because it is sync html with typescript 
+	- so at a time input a text you shoued print this text in browser
+	- for that we use ngModel derective in input filed
+	- for ngModel derective we shoued import Form Module in app.module.ts file
+	- breacket remember like (banana in box as anguler team suggested)
+	
+ngIf Directive
+	-it is if condiction in angular
+	-it is use "*ngIf" keyword 
+	- f.g 
+	 <div *ngIf="true; then thenBlock; else elseBlock" >
+    </div>
+
+    <ng-template #thenBlock>
+      <h2>if gopal</h2>
+    </ng-template>
+
+    <ng-template #elseBlock>
+      <h2>
+        else gopal block
+      </h2>
+    </ng-template>
+	
+ngSwitch Directive :- ngSwitch 
+	-it is a switch statment
+	-for switch case "*ngSwitchCase" keyword use
+	
+ngFor	
+	- for loop
+	- f.g:-
+	<div *ngFor="let color of colors; index as i">
+      <h2>{{i}} {{color}}</h2>
+    </div>
+	-where colors is array variable in typescript class (which have multiple entry)
+		-and itreat throough for loop and dispplay in browser
+	-if you want to shown index than write "index as i"	 and print it
+	
+Component Interaction
+	-it intract parent ot chiled componant and chiled to parent componant
+	-if you want to shown data in chiled template through parent template and vise versa
+	
+Pipes - |
+	-pipes opreter use for view 
+	-use with date formate through various keyword Like:- short,shortDate Etc
+	-use with number formate
+	-use with string formate
+	
+Services
+	-if we have to use some other component data in another then we have to dublicate a data
+		-so thats why we need to reuse a code and use service class in typescript
+	-in another component we need to fetch data from another componant using service
+	-it is use to share data from another componant
+	-if we calculate business logic on that senario also use service
+	-Nameing convenction :- ".service.ts"
+	
+Dependency Injection
+	-problem without DI
+		class engine{
+			constructor(){
+			}
+		}
+		class tyre{
+			constructor(){
+			}
+		}
+		class car{
+			constructor(){
+				engine e = new engine();
+				car e = new car();
+			}
+		}
+			- in this above senario if engine add new perameter in constructor(e.g type= petrol) so you shoued to change also in clr constructor
+			- so car class dependent on engine and tyre class 
+			- if we want to use some newEngine class in car class then also not possible 
+			- so for that we use engine and tyre object as a perameter and try to crate a object at run time, it is dependency injection
+			f.g:-
+				class engine{
+					constructor(){
+					}
+				}
+				class tyre{
+					constructor(){
+					}
+				}
+				class car{
+					engine;
+					tyre;
+					constructor(engine,tyre){
+						this.engine = engine;
+						this.car = car;
+					}
+				}
+				
+				// at run time
+				engine e1 = new engine();
+				tyre t1 = new tyre();
+				car c1 = new car(e1,t1);
+				
+				engine e1 = new engine(newengine);
+				tyre t1 = new tyre(newtyre);
+				car c1 = new car(e1,t1);
+				
+				-in both the cases work fine so you need not dependent on any other class
+				-but if thre a re many class object pass as a argument and that object also dependent on other object or class,
+				-so on that time difficult to manage
+				-angular provide us to manage all dependency in list and based on create a service for same
+				
+
+Using a Service
+	-create a sevice class through "ng g s <service name>"
+	-create a serice (method) in service class
+	-register a service with anular injector
+		-meanse define or cordinate service with angular, if you didn't then it is another class in angular
+		-angular use hirichical structure in inject a service	
+			-like if you define service in any componant then this componant and his chiled ocmponant use this service
+			-so we define service in module so, all componant of this module use same service
+	-declred as a constrctor in typescript class and use it in template
+	-Injectable
+		it is decoreter to use when one service dependent on other
+		so basically when you create a service class at that time anular CLI priove Injectable decorecter by default
+			in future is dependency append then you shoued use
+		any other typescript class dos.nt have this decoreter
+			because they have componant decoreter in it
+			
+HTTP and Observables
+	-first we make a http get request  to database and get back a responce in service
+		request
+			->ts class(emp details) -> service class (employeeservice) -> http request (browser) - > DB
+		responce	
+			->DB ->responce (observable) -> serice (employeeservice) -> ts class -> template
+			
+	-how to do	
+		-first import a httpclientmodule in app module class
+		-after that add httpclient argument in service class
+		-through httpclient variable we call get method in service class method
+			-we pass json file url in argument of get method
+		-so this method return a Observables, so we need to convert into our app releted object
+			-for that we create a interface and convert observable into interface and return it
+		-now we need to subscribe observable, it didn't provide data unless someone subscribe it
+			so we subscribe data and pass data into local variable
+				-and this local varibale use in view though Interpolation
+
+			
+		
+				
+				
+			
+	
+	
+	
